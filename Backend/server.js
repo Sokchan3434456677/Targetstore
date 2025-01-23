@@ -7,6 +7,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios'); // For HTTP requests
 
 const app = express();
+const IP_ADDRESS = '3.86.162.13';
 // const IP_ADDRESS = '192.168.1.12'; // Replace with your computer's IP address
 const PORT = 5000;
 
@@ -223,10 +224,9 @@ app.get('/api/invoices/image/:id', async (req, res) => {
 
 // Start the server
 // app.listen(PORT, IP_ADDRESS, () => {
-  app.listen(PORT, () => {
-  // console.log(`Server is running on http://${IP_ADDRESS}:${PORT}`);
-  console.log(`Server is running on http://localhost:${PORT}`);
-
+// Start the server
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on http://0.0.0.0:${PORT}`);
 });
 
 // Telegram Bot Command to Fetch and Send Image
@@ -236,8 +236,8 @@ bot.onText(/\/getimage (.+)/, async (msg, match) => {
 
   try {
     // Fetch the Base64 image from the backend
-    // const response = await axios.get(`http://${IP_ADDRESS}:${PORT}/api/invoices/image/${invoiceId}`);
-    const response = await axios.get(`http://localhost:${PORT}/api/invoices/image/${invoiceId}`);
+    const response = await axios.get(`http://${IP_ADDRESS}:${PORT}/api/invoices/image/${invoiceId}`);
+    // const response = await axios.get(`http://localhost:${PORT}/api/invoices/image/${invoiceId}`);
    
     const base64Image = response.data.image;
 
