@@ -69,7 +69,7 @@ function Cart() {
         items: cartItems,
       };
 
-      const response = await axios.post('http://localhost:5000/api/invoice', invoiceData);
+      const response = await axios.post('http://3.86.162.13:5000/api/invoice', invoiceData);
       if (response.status === 201) {
         toast.success('Invoice saved successfully!');
         generateInvoice();
